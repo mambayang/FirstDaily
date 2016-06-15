@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_top_story_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitStart" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.38"
+        android:background="@color/colorBlack"
+        android:scaleType="fitStart" />
+
+    <TextView
+        android:id="@+id/tv_top_story_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_gravity="bottom"
+        android:textSize="@dimen/text_size_20"
+        android:textColor="@color/colorWhite"
+        android:text="where am i??????????" />
+
+</FrameLayout>
