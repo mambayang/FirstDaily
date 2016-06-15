@@ -12,9 +12,9 @@ import java.util.List;
  * Created by yrg on 2016/6/14.
  */
 public class TopStoriesPagerAdapter extends PagerAdapter {
-    private List<ImageView> layoutList;
+    private List<View> layoutList;
 
-    public TopStoriesPagerAdapter(List<ImageView> layoutList) {
+    public TopStoriesPagerAdapter(List<View> layoutList) {
         this.layoutList = layoutList;
     }
 

@@ -28,4 +28,7 @@
     <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_22">22sp</dimen>
     <dimen name="text_size_24">24sp</dimen>
+
+    <!-- Main Content -->
+    <dimen name="top_story_height">240dp</dimen>
 </resources>
