@@ -2,6 +2,8 @@ package com.yrg.firstdaily.activity.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -32,6 +34,21 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private static final String TAG = "HomeFragment";
     private List<View> layoutList;
     private ViewPager vpTopStories;
+    private int pagerNumber = 0;
+    private int currentPager = 0;
+    private static final int DELAY_MILLION_SECONDS = 3000;
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (currentPager == pagerNumber - 1) {
+                currentPager = -1;
+            }
+            vpTopStories.setCurrentItem(currentPager + 1);
+            handler.sendEmptyMessageDelayed(0, DELAY_MILLION_SECONDS);
+        }
+    };
 
     public HomeFragment() {
     }
@@ -58,8 +75,18 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
             public void onResponse(String response, int id) {
                 ParseResponse(response);
                 setAdatper();
+                beginLoop();
             }
         });
+    }
+
+    private void beginLoop() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessageDelayed(0, DELAY_MILLION_SECONDS);
+            }
+        }).start();
     }
 
     private void setAdatper() {
@@ -72,7 +99,8 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         TodayContent todayContent = GsonUtil.GsonToEntity(response, TodayContent.class);
         Log.i(TAG, todayContent.getDate());
         ArrayList<TodayTopStory> topStories = todayContent.getTop_stories();
-        for (int i = 0; i < topStories.size(); i++) {
+        pagerNumber = topStories.size();
+        for (int i = 0; i < pagerNumber; i++) {
             Log.i(TAG, topStories.get(i).getTitle());
             Log.i(TAG, topStories.get(i).getImage());
             //创建view
@@ -90,12 +118,12 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
+        currentPager = position;
     }
 
     @Override
     public void onPageSelected(int position) {
-
+        currentPager = position;
     }
 
     @Override
