@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_comment"
+        android:icon="@drawable/story_comment"
+        android:orderInCategory="80"
+        android:title="@string/comment_story"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_thumb_up"
+        android:icon="@drawable/story_thumb_up"
+        android:orderInCategory="90"
+        android:title="@string/popularity_story"
+        app:showAsAction="ifRoom" />
+
+</menu>

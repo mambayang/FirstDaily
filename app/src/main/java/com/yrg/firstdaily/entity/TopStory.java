@@ -3,7 +3,7 @@ package com.yrg.firstdaily.entity;
 /**
  * Created by yrg on 2016/6/14.
  */
-public class TodayTopStory {
+public class TopStory {
     private String id;
     private String title;
     private String image;

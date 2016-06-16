@@ -1,4 +1,4 @@
-package com.yrg.firstdaily.activity.main;
+package com.yrg.firstdaily.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_overflow, menu);
+        getMenuInflater().inflate(R.menu.menu_main_toolbar, menu);
         return true;
     }
 

@@ -1,4 +1,4 @@
-package com.yrg.firstdaily.activity.launch;
+package com.yrg.firstdaily.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.yrg.firstdaily.R;
-import com.yrg.firstdaily.activity.BaseActivity;
-import com.yrg.firstdaily.activity.main.MainActivity;
 import com.yrg.firstdaily.entity.LaunchInfo;
 import com.yrg.firstdaily.net.URLConstant;
 import com.yrg.firstdaily.util.GsonUtil;

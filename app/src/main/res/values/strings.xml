@@ -8,4 +8,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="comment_story">评论</string>
+    <string name="popularity_story">点赞人数</string>
+    <string name="story_extra">附加数据</string>
 </resources>

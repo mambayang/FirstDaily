@@ -31,4 +31,5 @@
 
     <!-- Main Content -->
     <dimen name="top_story_height">240dp</dimen>
+    <dimen name="story_detail_height">220dp</dimen>
 </resources>
