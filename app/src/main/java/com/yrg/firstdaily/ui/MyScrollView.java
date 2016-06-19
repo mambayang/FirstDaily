@@ -77,8 +77,4 @@ public class MyScrollView extends ScrollView {
         return super.onInterceptTouchEvent(ev);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
 }

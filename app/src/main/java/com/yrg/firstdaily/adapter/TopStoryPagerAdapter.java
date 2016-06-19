@@ -60,8 +60,7 @@ public class TopStoryPagerAdapter extends PagerAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, StoryActivity.class);
                 intent.putExtra("story_url", URLConstant.URL_STORY_DETAIL + storyId);
-                intent.putExtra("story_extra_url", URLConstant.URL_STORY_EXTRA + storyId
-                );
+                intent.putExtra("story_extra_url", URLConstant.URL_STORY_EXTRA + storyId);
                 context.startActivity(intent);
             }
         });

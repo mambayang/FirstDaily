@@ -29,6 +29,8 @@ public class StoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private List<DateStory> dateStoryList;
     private LayoutInflater layoutInflater;
 
+    private onRecyclerViewItemClickListener itemClickListener;
+
     public StoryListAdapter(Context context, List<DateStory> dateStoryList) {
         this.context = context;
         this.dateStoryList = dateStoryList;
@@ -103,14 +105,16 @@ public class StoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         TextView tvCardView;
         ImageView ivCardView;
 
-        public CardViewNormalHolder(View itemView) {
+        public CardViewNormalHolder(final View itemView) {
             super(itemView);
             tvCardView = (TextView) itemView.findViewById(R.id.tv_card_view);
             ivCardView = (ImageView) itemView.findViewById(R.id.iv_card_view);
             itemView.findViewById(R.id.layout_card_view).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.i(TAG, getLayoutPosition() + "");
+                    if (itemClickListener != null) {
+                        itemClickListener.onItemClick(v, getLayoutPosition());
+                    }
                 }
             });
         }
@@ -123,6 +127,14 @@ public class StoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(itemView);
             tvCardViewDate = (TextView) itemView.findViewById(R.id.tv_card_view_date);
         }
+    }
+
+    public interface onRecyclerViewItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
+    public void setOnItemClickListener(onRecyclerViewItemClickListener listener) {
+        this.itemClickListener = listener;
     }
 
 }

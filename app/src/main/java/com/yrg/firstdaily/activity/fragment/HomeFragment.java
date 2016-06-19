@@ -1,6 +1,7 @@
 package com.yrg.firstdaily.activity.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.yrg.firstdaily.R;
+import com.yrg.firstdaily.activity.StoryActivity;
 import com.yrg.firstdaily.adapter.StoryListAdapter;
 import com.yrg.firstdaily.adapter.TopStoryPagerAdapter;
 import com.yrg.firstdaily.entity.BeforeStory;
@@ -228,7 +230,22 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         }
         Log.i(TAG, "date story list size " + dateStoryList.size());
         adapter = new StoryListAdapter(getActivity(), dateStoryList);
+        adapter.setOnItemClickListener(new StoryListAdapter.onRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Log.i(TAG,"position is "+position);
+                goToStoryActivity(position);
+            }
+        });
         recyclerView.setAdapter(adapter);
+    }
+
+    private void goToStoryActivity(int position) {
+        String storyId = dateStoryList.get(position).getId();
+        Intent intent = new Intent(getActivity(), StoryActivity.class);
+        intent.putExtra("story_url", URLConstant.URL_STORY_DETAIL + storyId);
+        intent.putExtra("story_extra_url", URLConstant.URL_STORY_EXTRA + storyId);
+        startActivity(intent);
     }
 
     @Override

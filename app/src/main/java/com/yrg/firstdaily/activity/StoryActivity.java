@@ -37,8 +37,6 @@ public class StoryActivity extends BaseActivity {
     private WebView webView;
     private String storyUrl;
     private String storyExtraUrl;
-    private String cssPath;
-
 
     @Override
     protected void loadData() {
