@@ -29,13 +29,6 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
         final int heightMode = View.MeasureSpec.getMode(heightSpec);
         final int widthSize = View.MeasureSpec.getSize(widthSpec);
         final int heightSize = View.MeasureSpec.getSize(heightSpec);
-        Log.i(TAG, "onMeasure called. widthSpec " + widthSpec
-                + "\nheightSpec" + heightSpec
-                + "\nwidthMode " + widthMode
-                + " \nheightMode " + heightMode
-                + " \nwidthSize " + widthSize
-                + " \nheightSize " + heightSize
-                + " \ngetItemCount() " + getItemCount());
         int width = 0;
         int height = 0;
         for (int i = 0; i < getItemCount(); i++) {

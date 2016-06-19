@@ -47,7 +47,6 @@ public class StoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DateStory dateStory = dateStoryList.get(position);
-
         if (dateStory == null) {
             return;
         }
