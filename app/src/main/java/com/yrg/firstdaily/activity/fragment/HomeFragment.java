@@ -6,16 +6,21 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yrg.firstdaily.R;
-import com.yrg.firstdaily.adapter.TopStoriyPagerAdapter;
-import com.yrg.firstdaily.entity.TodayContent;
+import com.yrg.firstdaily.adapter.StoryListAdapter;
+import com.yrg.firstdaily.adapter.TopStoryPagerAdapter;
+import com.yrg.firstdaily.entity.DateStory;
+import com.yrg.firstdaily.entity.HomeContent;
 import com.yrg.firstdaily.entity.TopStory;
 import com.yrg.firstdaily.net.URLConstant;
+import com.yrg.firstdaily.ui.MyLinearLayoutManager;
 import com.yrg.firstdaily.util.GsonUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -33,6 +38,9 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private int pagerNumber = 0;
     private int currentPager = 0;
     private static final int DELAY_MILLION_SECONDS = 3000;
+
+    private RecyclerView recyclerView;
+    private List<DateStory> dateStoryList;
 
     private Handler handler = new Handler() {
         @Override
@@ -54,6 +62,14 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycle_view);
+        MyLinearLayoutManager layoutManager = new MyLinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setAutoMeasureEnabled(false);
+        layoutManager.setSmoothScrollbarEnabled(true);
+        recyclerView.setLayoutManager(layoutManager);
+
         vpTopStories = (ViewPager) view.findViewById(R.id.vp_top_stories);
         topStoryList = new ArrayList<>();
         getHomeData();
@@ -86,16 +102,27 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     }
 
     private void setAdatper() {
-        TopStoriyPagerAdapter pagerAdapter = new TopStoriyPagerAdapter(getActivity(),topStoryList);
+        TopStoryPagerAdapter pagerAdapter = new TopStoryPagerAdapter(getActivity(), topStoryList);
         vpTopStories.setAdapter(pagerAdapter);
         vpTopStories.addOnPageChangeListener(this);
     }
 
     private void ParseResponse(String response) {
-        TodayContent todayContent = GsonUtil.GsonToEntity(response, TodayContent.class);
-        Log.i(TAG, todayContent.getDate());
-        topStoryList = todayContent.getTop_stories();
+        HomeContent homeContent = GsonUtil.GsonToEntity(response, HomeContent.class);
+        topStoryList = homeContent.getTop_stories();
         pagerNumber = topStoryList.size();
+        //构建带日期的story列表
+        dateStoryList = new ArrayList<>();
+        for (int i = 0; i < homeContent.getStories().size(); i++) {
+            DateStory dateStory = new DateStory();
+            dateStory.setDate(homeContent.getDate());
+            dateStory.setId(homeContent.getStories().get(i).getId());
+            dateStory.setTitle(homeContent.getStories().get(i).getTitle());
+            dateStory.setImage(homeContent.getStories().get(i).getImages()[0]);
+            dateStoryList.add(dateStory);
+        }
+        Log.i(TAG,"date story list size "+dateStoryList.size());
+        recyclerView.setAdapter(new StoryListAdapter(getActivity(),dateStoryList));
     }
 
     @Override

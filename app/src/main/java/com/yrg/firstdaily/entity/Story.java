@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by yrg on 2016/6/14.
  */
-public class TodayStory {
+public class Story {
     private String id;
     private String title;
     private String [] images;

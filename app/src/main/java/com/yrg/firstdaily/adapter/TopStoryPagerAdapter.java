@@ -21,12 +21,12 @@ import java.util.List;
 /**
  * Created by yrg on 2016/6/14.
  */
-public class TopStoriyPagerAdapter extends PagerAdapter {
-    private static final String TAG = "TopStoriyPagerAdapter";
+public class TopStoryPagerAdapter extends PagerAdapter {
+    private static final String TAG = "TopStoryPagerAdapter";
     private Context context;
     private List<TopStory> topStoryList;
 
-    public TopStoriyPagerAdapter(Context context, List<TopStory> topStoryList) {
+    public TopStoryPagerAdapter(Context context, List<TopStory> topStoryList) {
         this.context = context;
         this.topStoryList = topStoryList;
     }
