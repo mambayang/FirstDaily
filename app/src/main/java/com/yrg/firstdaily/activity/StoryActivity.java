@@ -30,7 +30,6 @@ import okhttp3.Call;
 public class StoryActivity extends BaseActivity {
 
     private static final String TAG = "StoryActivity";
-    private static final String CSS_FILE_NAME = "story_css.css";
     private Toolbar toolbar;
     private ImageView ivStoryDetail;
     private TextView tvStoryDetail;
@@ -85,7 +84,7 @@ public class StoryActivity extends BaseActivity {
         tvStoryDetail.setText(storyDetail.getTitle());
 //        Log.i(TAG, storyDetail.getCss()[0].toString());
         String body = "<link rel = 'stylesheet' href='" + storyDetail.getCss()[0] + "' type='text/css' >" + storyDetail.getBody();
-//        Log.i(TAG, body);
+        Log.i(TAG, body);
         webView.loadDataWithBaseURL(null, body, "text/html", "utf-8", null);
     }
 

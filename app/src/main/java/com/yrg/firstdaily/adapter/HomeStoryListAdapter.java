@@ -19,9 +19,9 @@ import java.util.List;
 /**
  * Created by yrg on 2016/6/16.
  */
-public class StoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HomeStoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private static final String TAG = "StoryListAdapter";
+    private static final String TAG = "HomeStoryListAdapter";
     private static final int ITEM_NORMAL = 0;
     private static final int ITEM_DATE = 1;
 
@@ -31,7 +31,7 @@ public class StoryListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private onRecyclerViewItemClickListener itemClickListener;
 
-    public StoryListAdapter(Context context, List<DateStory> dateStoryList) {
+    public HomeStoryListAdapter(Context context, List<DateStory> dateStoryList) {
         this.context = context;
         this.dateStoryList = dateStoryList;
         layoutInflater = LayoutInflater.from(context);

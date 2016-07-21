@@ -8,17 +8,15 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.yrg.firstdaily.R;
 import com.yrg.firstdaily.activity.StoryActivity;
-import com.yrg.firstdaily.adapter.StoryListAdapter;
+import com.yrg.firstdaily.adapter.HomeStoryListAdapter;
 import com.yrg.firstdaily.adapter.TopStoryPagerAdapter;
 import com.yrg.firstdaily.entity.BeforeStory;
 import com.yrg.firstdaily.entity.DateStory;
@@ -28,7 +26,6 @@ import com.yrg.firstdaily.net.URLConstant;
 import com.yrg.firstdaily.ui.MyLinearLayoutManager;
 import com.yrg.firstdaily.ui.MyScrollView;
 import com.yrg.firstdaily.util.GsonUtil;
-import com.yrg.firstdaily.util.ScreenUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -48,13 +45,12 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private int pagerNumber = 0;
     private int currentPager = 0;
     private static final int DELAY_MILLION_SECONDS = 3000;
-    private int lastVisibleItem = 0;
     private Date savedDate;
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private MyScrollView scrollView;
     private RecyclerView recyclerView;
-    private StoryListAdapter adapter;
+    private HomeStoryListAdapter adapter;
     private MyLinearLayoutManager layoutManager;
     private List<DateStory> dateStoryList;
 
@@ -101,9 +97,9 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         });
 
         layoutManager = new MyLinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setAutoMeasureEnabled(false);
-        layoutManager.setSmoothScrollbarEnabled(true);
+//        layoutManager.setSmoothScrollbarEnabled(true);
         recyclerView.setLayoutManager(layoutManager);
 
         topStoryList = new ArrayList<>();
@@ -229,11 +225,10 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
             dateStoryList.add(dateStory);
         }
         Log.i(TAG, "date story list size " + dateStoryList.size());
-        adapter = new StoryListAdapter(getActivity(), dateStoryList);
-        adapter.setOnItemClickListener(new StoryListAdapter.onRecyclerViewItemClickListener() {
+        adapter = new HomeStoryListAdapter(getActivity(), dateStoryList);
+        adapter.setOnItemClickListener(new HomeStoryListAdapter.onRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Log.i(TAG,"position is "+position);
                 goToStoryActivity(position);
             }
         });

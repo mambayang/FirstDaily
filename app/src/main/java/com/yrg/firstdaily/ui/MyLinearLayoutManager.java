@@ -33,7 +33,7 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
         int height = 0;
         for (int i = 0; i < getItemCount(); i++) {
             measureScrapChild(recycler, i,
-                    View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
+                    widthSpec,
                     View.MeasureSpec.makeMeasureSpec(i, View.MeasureSpec.UNSPECIFIED),
                     measuredDimension);
             if (getOrientation() == HORIZONTAL) {
@@ -60,7 +60,7 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
             case View.MeasureSpec.AT_MOST:
             case View.MeasureSpec.UNSPECIFIED:
         }
-        setMeasuredDimension(width, height);
+        setMeasuredDimension(widthSpec, height);
     }
 
     private void measureScrapChild(RecyclerView.Recycler recycler,
@@ -72,11 +72,11 @@ public class MyLinearLayoutManager extends LinearLayoutManager {
             View view = recycler.getViewForPosition(position);
             if (view != null) {
                 RecyclerView.LayoutParams p = (RecyclerView.LayoutParams) view.getLayoutParams();
-                int childWidthSpec = ViewGroup.getChildMeasureSpec(widthSpec, getPaddingLeft() + getPaddingRight(), p.width);
                 int childHeightSpec = ViewGroup.getChildMeasureSpec(heightSpec, getPaddingTop() + getPaddingBottom(), p.height);
-                view.measure(childWidthSpec, childHeightSpec);
+                view.measure(widthSpec, childHeightSpec);
                 measuredDimension[0] = view.getMeasuredWidth() + p.leftMargin + p.rightMargin;
                 measuredDimension[1] = view.getMeasuredHeight() + p.bottomMargin + p.topMargin;
+                Log.i(TAG,"measured dimension[1]   "+measuredDimension[1]);
                 recycler.recycleView(view);
             }
         } catch (Exception e) {
